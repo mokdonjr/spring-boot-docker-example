@@ -52,6 +52,7 @@
 							<name>mokdonjr/spring-boot-docker-example-image</name>
 							<build>
 								<dockerFileDir>${basedir}</dockerFileDir>
+<!--								<dockerHost></dockerHost>-->
 							</build>
 						</image>
 					</images>
@@ -64,7 +65,7 @@
 						<goals>
 							<goal>build</goal>
 							<!-- 빌드 성공시 레포지터리로 이미지 푸쉬 -->
-							<goal>push</goal>
+<!--							<goal>push</goal>-->
 						</goals>
 					</execution>
 				</executions>
