@@ -37,7 +37,40 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- 빌드 통합. jar 패키징 후 이미지 빌드 자동화 -->
+			<!-- maven to docker plugin. https://github.com/fabric8io/docker-maven-plugin , http://dmp.fabric8.io/ -->
+			<!-- `docker build -t spring-boot-docker-example .` 대신 `mvn docker:build` -->
+			<!-- `docker run -d -p 8080:8080 spring-boot-docker-example` 실행만 하자 -->
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.31.0</version>
+				<configuration>
+					<images>
+						<image>
+							<name>mokdonjr/spring-boot-docker-example-image</name>
+							<build>
+								<dockerFileDir>${basedir}</dockerFileDir>
+							</build>
+						</image>
+					</images>
+				</configuration>
+				<!-- mvn package 이후로 끼워넣기 -->
+				<executions>
+					<execution>
+						<id>docker-execution</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+							<!-- 빌드 성공시 레포지터리로 이미지 푸쉬 -->
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
