@@ -60,9 +60,10 @@
 				<!-- mvn package 이후로 끼워넣기 -->
 				<executions>
 					<execution>
-						<id>docker-execution</id>
+						<id>docker-build</id>
 						<phase>package</phase>
 						<goals>
+							<!-- `docker rm <container id>` , `docker rmi <image id>` 추가해야 자동화 완성 -->
 							<goal>build</goal>
 							<!-- 빌드 성공시 레포지터리로 이미지 푸쉬 -->
 <!--							<goal>push</goal>-->
